@@ -7,28 +7,38 @@ namespace WebAppExam.Factories;
 
 public class CustomClaimsPrincipalFactory : UserClaimsPrincipalFactory<IdentityUser>
 {
-	private readonly UserProfileService _userProfileService;
+    private readonly UserService _userService;
 
-	public CustomClaimsPrincipalFactory(UserManager<IdentityUser> userManager, IOptions<IdentityOptions> optionsAccessor, UserProfileService userProfileService) : base(userManager, optionsAccessor)
-	{
-		_userProfileService = userProfileService;
-	}
+    public CustomClaimsPrincipalFactory(UserManager<IdentityUser> userManager, IOptions<IdentityOptions> optionsAccessor, UserService userService) : base(userManager, optionsAccessor)
+    {
+        _userService = userService;
+    }
 
-	protected override async Task<ClaimsIdentity> GenerateClaimsAsync(IdentityUser user)
-	{
-		var claimsIdentity = await base.GenerateClaimsAsync(user);
+    //Add custom claims:
+    protected override async Task<ClaimsIdentity> GenerateClaimsAsync(IdentityUser user)
+    {
+        var claimsIdentity = await base.GenerateClaimsAsync(user);
 
-		//Add custom claims
-		var userProfileEntity = await _userProfileService.GetUserProfileAsync(user.Id);
-		claimsIdentity.AddClaim(new Claim("DisplayName", $"{userProfileEntity.FirstName} {userProfileEntity.LastName}"));
+        try
+        {
+            var userProfileEntity = await _userService.GetUserProfileAsync(user.Id);
 
-		// Add user roles to claims
-		var roles = await UserManager.GetRolesAsync(user);
-		foreach (var role in roles)
-		{
-			claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role));
-		}
+            if (userProfileEntity != null)
+            {
+                // Add a combined string of "FirstName LastName"
+                claimsIdentity.AddClaim(new Claim("DisplayName", $"{userProfileEntity.FirstName} {userProfileEntity.LastName}"));
 
-		return claimsIdentity;
-	}
+                // Add user roles
+                var roles = await UserManager.GetRolesAsync(user);
+                foreach (var role in roles)
+                {
+                    claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role));
+                }
+
+                return claimsIdentity;
+            }
+            return null!;
+        }
+        catch { return null!; }
+    }
 }

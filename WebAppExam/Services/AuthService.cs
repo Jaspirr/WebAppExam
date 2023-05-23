@@ -29,7 +29,7 @@ public class AuthService
 
 
 
-    public async Task<bool> RegisterAsync(RegisterViewModel viewModel)
+    public async Task<bool> RegisterAsync(AccountRegisterViewModel viewModel)
     {
         try
         {
@@ -46,8 +46,8 @@ public class AuthService
             await _userManager.AddToRoleAsync(identityUser, roleName);
 
             //Skapa profil för användarprofil
-            UserProfileEntity userprofileEntity = viewModel;
-            userprofileEntity.UserId = identityUser.Id;
+            ProfileEntity userprofileEntity = viewModel;
+            userprofileEntity.Id = identityUser.Id;
 
             //sparar ner till identitycontext
             _identityContext.UserProfiles.Add(userprofileEntity);

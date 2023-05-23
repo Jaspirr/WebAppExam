@@ -1,4 +1,4 @@
-﻿@model RegisterViewModel
+﻿@model AccountRegisterViewModel
 @{
     ViewData["Title"] = "Sign up for new account";
 }
@@ -9,13 +9,13 @@
         <h1 class="display-4">Sign Up for new Account</h1>
 
         <form asp-action="Register" method="post" novalidate>
-            
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
             <div class="mt-15">
                 <label asp-for="FirstName" class="form-label"></label>
-                <input asp-for="FirstName" class="form-control"/>
+                <input asp-for="FirstName" class="form-control" />
                 <small><span asp-validation-for="FirstName" class="text-danger"></span></small>
             </div>
 
@@ -68,9 +68,9 @@
             </div>
 
             <div class="d-grid">
-                <button type="submit" class="btn btn-success mt-2" >SIGN UP NOW</button>
+                <button type="submit" class="btn btn-success mt-2">SIGN UP NOW</button>
             </div>
         </form>
     </div>
-    
+
 </div>

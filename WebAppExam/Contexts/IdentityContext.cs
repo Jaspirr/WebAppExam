@@ -11,8 +11,7 @@ public class IdentityContext : IdentityDbContext<IdentityUser>
 	{
 	}
 
-	public DbSet<UserProfileEntity> UserProfiles { get; set; }
-	public DbSet<AddressEntity> Addresses { get; set; }
+	public DbSet<ProfileEntity> UserProfiles { get; set; }
 
 	protected override void OnModelCreating(ModelBuilder builder)
 	{
@@ -20,6 +19,5 @@ public class IdentityContext : IdentityDbContext<IdentityUser>
 
 		builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "admin", NormalizedName = "ADMIN" });
 		builder.Entity<IdentityRole>().HasData(new IdentityRole { Name = "user", NormalizedName = "USER" });
-        builder.Entity<AddressEntity>().HasIndex(x => x.StreetName).IsUnique();
     }
 }

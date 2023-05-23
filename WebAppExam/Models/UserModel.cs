@@ -15,11 +15,11 @@ namespace WebAppExam.Models
         public string Role { get; set; } = null!;
         public string? ProfileImage { get; set; }
 
-        public static implicit operator UserModel(UserProfileEntity entity)
+        public static implicit operator UserModel(ProfileEntity entity)
         {
             return new UserModel
             {
-                Id = entity.User.Id,
+                Id = entity.Id,
                 FirstName = entity.FirstName,
                 LastName = entity.LastName,
                 Email = entity.User.Email!,

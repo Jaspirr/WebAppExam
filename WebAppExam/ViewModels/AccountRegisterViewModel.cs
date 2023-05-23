@@ -62,14 +62,12 @@ namespace WebAppExam.ViewModels
         public string ConfirmPassword { get; set; } = null!;
 
 
-        [Display(Name = "Profile Image Url (optional)")]
+        [Display(Name = "Profile Image Web Url (optional)")]
         public string? ProfileImage { get; set; }
 
         [Required(ErrorMessage = "Please Accept the Terms.")]
         public bool AcceptsTerms { get; set; } = false;
 
-
-        #region implicit operators
 
         public static implicit operator IdentityUser(AccountRegisterViewModel viewModel)
         {
@@ -81,9 +79,9 @@ namespace WebAppExam.ViewModels
             };
         }
 
-        public static implicit operator UserProfileEntity(AccountRegisterViewModel viewModel)
+        public static implicit operator ProfileEntity(AccountRegisterViewModel viewModel)
         {
-            return new UserProfileEntity
+            return new ProfileEntity
             {
                 FirstName = viewModel.FirstName,
                 LastName = viewModel.LastName,
@@ -101,7 +99,6 @@ namespace WebAppExam.ViewModels
                 City = viewModel.City
             };
         }
-
-        #endregion
     }
 }
+

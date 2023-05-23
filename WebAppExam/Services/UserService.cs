@@ -19,10 +19,13 @@ public class UserService
         _roleService = roleService;
     }
 
-    public async Task<UserProfileEntity> GetUserProfileAsync(string userId)
+    public async Task<ProfileEntity> GetUserProfileAsync(string Id)
     {
-        var userProfileEntity = await _identityContext.UserProfiles.Include(x => x.User).Include(x => x.Address).FirstOrDefaultAsync(x => x.UserId == userId);
-        return userProfileEntity!;
+        var ProfileEntity = await _identityContext.UserProfiles
+            .Include(x => x.User)
+            .FirstOrDefaultAsync(x => x.Id == Id);
+
+        return ProfileEntity!;
     }
 
     public async Task<IdentityUser> GetIdentityUserAsync(string email)
@@ -32,7 +35,7 @@ public class UserService
         return identityUser!;
     }
 
-    public async Task<IEnumerable<UserModel>> GetAllUsersAsync()
+    public async Task<IEnumerable<UserModel>> GetAllUserModelAsync()
     {
         var userModels = new List<UserModel>();
         var userProfileEntities = await _identityContext.UserProfiles.Include(x => x.User).ToListAsync();

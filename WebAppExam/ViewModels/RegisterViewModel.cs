@@ -6,6 +6,7 @@ namespace WebAppExam.ViewModels
 {
     public class RegisterViewModel
     {
+        
         [Display(Name = "First Name*")]
         [Required(ErrorMessage = "Please enter your First Name.")]
         [RegularExpression(@"^[a-öA-Ö]+(?:[ é'-][a-öA-Ö]+)*$", ErrorMessage = "You need to enter a valid First Name.")]
@@ -64,12 +65,15 @@ namespace WebAppExam.ViewModels
             };
         }
 
-        public static implicit operator UserProfileEntity(RegisterViewModel viewModel)
+        public static implicit operator ProfileEntity(RegisterViewModel viewModel)
         {
-            return new UserProfileEntity
+            return new ProfileEntity
             {
                 FirstName = viewModel.FirstName,
                 LastName = viewModel.LastName,
+                StreetName = viewModel.StreetName,
+                PostalCode = viewModel.PostalCode,
+                City = viewModel.City,
                 CompanyName = viewModel.CompanyName,
                 ProfileImage = viewModel.ProfileImage
             };
@@ -81,17 +85,7 @@ namespace WebAppExam.ViewModels
             userEntity.GenererateSecurePassword(viewModel.Password);
             return userEntity;
         }
-
-        public static implicit operator ProfileEntity(RegisterViewModel viewModel)
-        {
-            return new ProfileEntity
-            {
-                FirstName = viewModel.FirstName,
-                LastName = viewModel.LastName,
-                StreetName = viewModel.StreetName,
-                PostalCode = viewModel.PostalCode,
-                City = viewModel.City,
-            };
-        }
     }
 }
+
+

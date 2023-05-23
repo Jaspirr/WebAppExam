@@ -1,21 +1,36 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Identity;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebAppExam.Models.Entities;
 
 public class ProfileEntity
 {
-    [Key, ForeignKey("User")]
-    public Guid UserId { get; set; }
+    [Key, ForeignKey(nameof(User))]
+    public string Id { get; set; } = null!;
+
+    [Required]
+    [Column(TypeName = "nvarchar(20)")]
     public string FirstName { get; set; } = null!;
+
+    [Required]
+    [Column(TypeName = "nvarchar(50)")]
     public string LastName { get; set; } = null!;
 
-    public string? StreetName { get; set; } 
-    public string? PostalCode { get; set; } 
+
+    [Column(TypeName = "nvarchar(50)")]
+    public string? StreetName { get; set; }
+    [Column(TypeName = "nvarchar(50)")]
+    public string? PostalCode{ get; set; }
+    [Column(TypeName = "nvarchar(50)")]
     public string? City { get; set; }
-    public string? PhoneNumber { get; set; }
+
+
+    [Column(TypeName = "nvarchar(50)")]
     public string? CompanyName { get; set; }
+
+    [Column(TypeName = "varchar(max)")]
     public string? ProfileImage { get; set; }
 
-    public UserEntity User { get; set; } = null!;
+    public IdentityUser User { get; set; } = null!;
 }
