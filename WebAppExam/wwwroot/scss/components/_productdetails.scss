@@ -1,0 +1,273 @@
+﻿@import '../core/_colors.scss';
+@import '../core/_fonts.scss';
+@import '../core/_mixins.scss';
+
+.productdetails {
+    padding-top: 50px;
+    padding-bottom: 50px;
+
+    .grid {
+        display: grid;
+        gap: 0.5rem;
+        grid-template-areas:
+            "big-img" "small-img" "product-text";
+
+        @include lg {
+            display: grid;
+            grid-template-columns: min-content 1fr;
+            grid-template-rows: auto auto;
+            grid-template-areas:
+                "big-img product-text" "small-img product-text";
+        }
+
+        .big-img {
+            grid-area: big-img;
+            width: 100%;
+
+            @include lg {
+            }
+
+            .img-holder {
+                max-width: 100%;
+                height: auto;
+                max-height: 430px;
+                overflow: hidden;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: $color-dark-4;
+                min-height: 400px;
+
+                @include lg {
+                    width: 501px;
+                    height: 430px;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+
+        .small-img {
+            grid-area: small-img;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+
+            @media (min-width: 450px) {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .img-holder {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 113px;
+                background: $color-dark-4;
+
+                @include md {
+                    margin-right: 0rem;
+                    height: 130px;
+                }
+
+                @include lg {
+                    height: 113px;
+                }
+
+
+                &:last-child {
+                    margin-right: 0rem;
+                    display: none;
+
+
+                    @media (min-width: 450px) {
+                        display: block;
+                    }
+                }
+
+                img[src=""],
+                img:not([src]) {
+                    opacity: 0;
+                }
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+
+        .product-text {
+            grid-area: product-text;
+            margin-top: 15px;
+            color: $color-dark-1;
+
+            @include lg {
+                margin-left: 50px;
+                margin-top: 0px;
+            }
+
+            @include xxl {
+                margin-left: 100px;
+            }
+
+            .product-name {
+                font-family: $font-poppins;
+                font-weight: $font-weight-medium;
+                font-size: 24px;
+                margin-bottom: 0.5rem;
+            }
+
+            .product-description {
+                color: $color-dark-2;
+                font-family: $font-roboto;
+            }
+
+            .review {
+                display: flex;
+                align-items: center;
+                margin-bottom: 0.5rem;
+
+                @include sm {
+                    margin-bottom: 1rem;
+                }
+
+                .star-holder {
+                    color: $color-yellow;
+                    font-size: 1.5rem;
+                }
+
+                .review-count {
+                    margin-left: 1rem;
+                    margin-top: 5px;
+                    font-family: $font-roboto;
+                }
+            }
+
+            .product-price {
+                font-family: $font-poppins;
+                color: $color-dark-1;
+                font-weight: $font-weight-semibold;
+                font-size: 24px;
+                margin-bottom: 0.5rem;
+
+                @include sm {
+                    margin-bottom: 1rem;
+                }
+            }
+
+            .btn-holder {
+
+                @include sm {
+                    display: flex;
+                }
+
+                .qty-counter {
+                    display: flex;
+                    align-items: center;
+                    height: 45px;
+                    margin-bottom: 1rem;
+
+                    @include sm {
+                        margin-bottom: 0rem;
+                    }
+
+                    .minus-btn {
+                        display: flex;
+                        align-items: center;
+                        border-color: $color-dark-4;
+                        padding: 10px 20px;
+                        height: 100%;
+                    }
+
+                    .qty {
+                        display: flex;
+                        align-items: center;
+                        padding: 10px 20px;
+                        border-top: 1px $color-dark-4 solid;
+                        border-bottom: 1px $color-dark-4 solid;
+                        height: 100%;
+                    }
+
+                    .plus-btn {
+                        display: flex;
+                        align-items: center;
+                        border-color: $color-dark-4;
+                        padding: 10px 20px;
+                        height: 100%;
+                    }
+                }
+
+                .btn-theme {
+                    height: 45px;
+                    margin-bottom: 1rem;
+
+                    @include sm {
+                        margin-bottom: 0rem;
+                    }
+
+                    i {
+                        margin-left: 1rem;
+                    }
+
+                    @include sm {
+                        margin-left: 1.5rem;
+                    }
+                }
+            }
+
+            .in-stock-indicator {
+                display: flex;
+                gap: 5px;
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+
+                .circle {
+                    width: 18px;
+                    height: 18px;
+                    border-radius: 9px;
+                }
+
+                .out-of-stock {
+                    background: $color-theme-1;
+                }
+
+                .few-in-stock {
+                    background: $color-yellow;
+                }
+
+                .in-stock {
+                    background: $color-green;
+                }
+            }
+
+            .product-sku {
+                margin-top: 1rem;
+                margin-bottom: 1rem;
+                margin-left: 30px;
+                font-family: $font-roboto;
+            }
+
+            .btn-white {
+                border-color: $color-dark-4;
+                color: $color-dark-1;
+                margin-bottom: 1rem;
+                height: 45px;
+
+                &:hover {
+                    color: $color-white;
+                }
+            }
+
+            .product-category {
+                color: $color-dark-2;
+                font-family: $font-roboto;
+            }
+        }
+    }
+}

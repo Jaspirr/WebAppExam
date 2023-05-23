@@ -1,0 +1,331 @@
+﻿@import '../core/_colors.scss';
+@import '../core/_fonts.scss';
+@import '../core/_mixins.scss';
+
+html,
+body {
+    font-size: 16px;
+    font-family: $font-roboto;
+    font-weight: $font-weight-regular;
+    color: $color-dark-3;
+}
+
+
+//---Utility classes---
+.no-bullets {
+    ul {
+        margin: 0;
+        padding: 0;
+
+        li {
+            list-style: none;
+        }
+    }
+}
+
+.h1-placeholder {
+    padding-top: 60px;
+    min-height: 425px;
+    display: flex;
+    justify-content: center;
+}
+
+.font-poppins {
+    font-family: $font-poppins !important;
+}
+
+.font-roboto {
+    font-family: $font-roboto !important;
+}
+
+.text-theme {
+    color: $color-theme-1;
+}
+
+a,
+.link,
+.card-link {
+    text-decoration: none;
+    color: $color-dark-1;
+    font-family: $font-poppins;
+    font-size: 16px;
+    transition: 0.05s ease-in-out;
+
+    &:hover {
+        text-decoration: underline;
+        color: $color-theme-1;
+    }
+}
+
+.heading {
+    font-family: $font-poppins;
+    font-weight: $font-weight-semibold;
+    color: $color-dark-1;
+}
+
+.margin-for-login-sm-screens {
+    height: 64px;
+
+    @include lg {
+        display: none;
+    }
+}
+
+.list-row {
+    background-color: #f8f9fa;
+    transition: 0.2s ease-in-out;
+
+    &:hover {
+        background-color: $color-theme-2;
+    }
+}
+
+.background-styling {
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+}
+
+//---Button styling---
+button,
+a.btn-white,
+a.btn-dark,
+a.btn-theme,
+a.btn-light-theme {
+    display: inline-block;
+    max-width: max-content;
+    padding: 10px 35px;
+    font-family: $font-poppins !important;
+    border: 1px solid $color-dark-1;
+    background-color: transparent;
+    color: $color-dark-1;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+    user-select: none;
+    text-decoration: none;
+
+    &:hover {
+        background-color: $color-dark-1;
+        color: $color-white;
+    }
+}
+
+.btn-white,
+a.btn-white {
+    background-color: $color-white;
+    color: $color-dark-2;
+    border: 1px solid $color-dark-2;
+}
+
+.btn-dark,
+a.btn-dark {
+    background-color: $color-dark-1;
+    color: $color-white;
+    border: 1px solid $color-dark-2;
+
+    &:hover {
+        background-color: $color-white;
+        color: $color-dark-1;
+    }
+}
+
+.btn-light-theme,
+a.btn-light-theme {
+    background-color: $color-theme-4;
+    color: $color-white;
+    border: none;
+
+    &:hover {
+        background-color: $color-dark-1;
+        color: $color-white;
+    }
+}
+
+.btn-theme,
+a.btn-theme {
+    border: none;
+    background-color: $color-theme-1;
+    color: $color-white;
+}
+
+//---Card styling---
+.card {
+    border: none !important;
+    width: 270px; //<--------CHANGE THIS WHEN OTHER WIDTH?
+    padding: 0;
+    font-family: $font-poppins;
+    border-radius: 0;
+
+    .img-holder {
+        width: 270px; //<--------CHANGE THIS WHEN OTHER WIDTH?
+        overflow: hidden;
+        background: $color-dark-4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        a {
+            width: 100%;
+            height: 100%;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 0;
+                transition: 0.45s ease-in-out;
+            }
+        }
+    }
+
+    &:hover {
+        .img-holder {
+            img {
+                transform: scale(1.05);
+            }
+        }
+
+        .card-body {
+            .card-icon {
+                color: $color-black;
+            }
+        }
+    }
+
+    .card-body {
+        width: 100%;
+        padding: 1rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .card-link {
+            font-size: 18px;
+            font-weight: $font-weight-medium;
+        }
+
+        .card-text {
+            font-weight: $font-weight-regular;
+            color: $color-dark-2;
+        }
+
+        .card-icon {
+            color: transparent;
+            margin: 0;
+            font-size: 1.2rem;
+            transition: 0.35s ease-in-out;
+
+            &:hover {
+                color: $color-theme-1;
+            }
+        }
+    }
+}
+
+//---Custom checkbox styling---
+//~~ with help of www3school + chatGPT + Hans github ~~
+.custom-checkbox {
+    display: inline-block;
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 12px;
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+
+    input {
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
+    }
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 15px;
+        width: 15px;
+        background-color: #eee;
+        margin-top: 2px;
+    }
+
+    &:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    & input:checked ~ .checkmark {
+        background-color: #efafaf;
+    }
+
+    & .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    & input:checked ~ .checkmark:after {
+        display: block;
+        left: 5px;
+        top: 2px;
+        width: 5px;
+        height: 10px;
+        border: solid white;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
+    }
+}
+
+//---Error styling of forms---
+.error-text {
+    display: block !important;
+    color: $color-theme-1;
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+}
+
+.error-text-asp {
+    display: block !important;
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+}
+
+.error-msg {
+    display: none;
+}
+
+.error {
+
+    input,
+    textarea {
+        border: $color-theme-1 1px solid !important;
+
+        &:focus {
+            outline-color: #f2d8d8;
+        }
+    }
+
+    .error-msg {
+        display: block !important;
+        color: $color-theme-1;
+    }
+}
+
+//---Positions---
+.position-static {
+    position: static !important;
+}
+
+.position-fixed-bottom {
+    position: fixed !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

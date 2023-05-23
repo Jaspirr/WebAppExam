@@ -1,0 +1,23 @@
+﻿@model GridCollectionViewModel
+
+<section class="topselling">
+    <div class="heading">@Model.Title</div>
+
+    @if (Model.GridItems != null)
+    {
+        <div class="row row-cols-6">
+            @foreach (var card in Model.GridItems)
+            {
+                <partial name="/Views/Partials/_GridCollectionCard.cshtml" model="card" />
+            }
+        </div>
+    }
+
+    @if (Model.LoadMore)
+    {
+        <div class="button-holder">
+            <button>&lt;</button>
+            <button>&gt;</button>
+        </div>
+    }
+</section>

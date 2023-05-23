@@ -1,0 +1,62 @@
+﻿@import '../core/_colors.scss';
+@import '../core/_fonts.scss';
+@import '../core/_mixins.scss';
+
+.sameproducts {
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    @include lg {
+        padding-top: 2rem;
+        padding-bottom: 60px;
+    }
+
+    .heading {
+        font-size: 24px;
+        margin-bottom: 1rem;
+        text-align: center;
+
+        @include xxl {
+            text-align: left;
+        }
+    }
+
+    .row {
+        gap: 20px;
+        justify-content: center;
+        margin: 0;
+
+        @include md {
+            gap: 40px;
+        }
+
+        @include xxl {
+            justify-content: space-between;
+        }
+    }
+
+    .col {
+        width: 270px;
+        padding: 0;
+
+
+        @include lg {
+            &:last-child {
+                display: none;
+            }
+        }
+
+        @include xxl {
+            &:last-child {
+                display: block;
+            }
+        }
+
+        .img-holder {
+            height: 295px;
+        }
+    }
+}

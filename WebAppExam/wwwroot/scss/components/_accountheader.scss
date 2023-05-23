@@ -1,0 +1,49 @@
+﻿@import '../core/_colors.scss';
+@import '../core/_fonts.scss';
+@import '../core/_mixins.scss';
+
+.accountheader {
+    font-family: $font-poppins;
+    background: $color-dark-1;
+    color: $color-white;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 15px;
+        padding-bottom: 15px;
+
+        @include sm {
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        a {
+            color: $color-white;
+            margin-right: 1rem;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            &:hover {
+                color: $color-theme-1;
+            }
+        }
+
+        .left-link {
+            margin-right: 1rem;
+            margin-bottom: 5px;
+
+            @include sm {
+                margin-bottom: 0rem;
+            }
+        }
+
+        .right-link {
+            text-align: center;
+        }
+    }
+}

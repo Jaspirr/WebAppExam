@@ -1,0 +1,13 @@
+﻿@model HomeIndexViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<partial name="/Views/Partials/_Showcase.cshtml" />
+<partial name="/Views/Partials/_GridCollection.cshtml" model="@Model.BestCollection" />
+<partial name="/Views/Partials/_GridCollection.cshtml" model="@Model.NewCollection" />
+<partial name="/Views/Partials/_UpToSell.cshtml" />
+<partial name="/Views/Partials/_TopSelling.cshtml" model="@Model.TopSellingCollection" />
+<partial name="/Views/Partials/_Spotlight.cshtml" model="@Model.PlantSpotlight" />
+<partial name="/Views/Partials/_SubscribeForm.cshtml" />
+

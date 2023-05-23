@@ -1,0 +1,95 @@
+﻿@import '../core/_colors.scss';
+@import '../core/_fonts.scss';
+@import '../core/_mixins.scss';
+
+.loginform {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    font-family: $font-roboto;
+
+    @include lg {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    a {
+        text-decoration: none;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .form-content {
+        background: $color-white;
+        color: $color-dark-2;
+        width: 100%;
+        padding: 30px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+        @include sm {
+            padding: 50px;
+        }
+
+        hr {
+            width: 60px;
+            margin-top: 0.3rem;
+            margin-bottom: 40px;
+            border-color: $color-dark-2;
+        }
+
+        form {
+            label {
+                margin-bottom: 5px;
+            }
+
+            .line {
+                display: grid;
+                margin-bottom: 1rem;
+
+                a {
+                    color: $color-theme-1;
+                    font-size: 14px;
+
+                    &:hover {
+                        color: $color-dark-1;
+                    }
+                }
+
+                input {
+                    padding: 5px 10px;
+                    border: none;
+                    background: #FAFAFA;
+                    font-family: $font-poppins;
+
+                    &:focus {
+                        outline-color: #f2d8d8;
+                    }
+                }
+
+                .email-content {
+                    display: flex;
+                    justify-content: space-between;
+
+                    @include lg {
+                        display: block;
+                    }
+
+                    a {
+                        margin-left: 1.5rem;
+                    }
+                }
+
+                .password-content {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+
+            button {
+                display: block;
+                margin-top: 30px;
+            }
+        }
+    }
+}

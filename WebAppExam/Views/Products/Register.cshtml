@@ -1,0 +1,49 @@
+﻿@model ProductRegisterViewModel
+
+<partial name="/Views/Partials/_ProductHeader.cshtml" />
+
+<section class="registerform">
+    <div class="container">
+        <div class="form-content">
+            <div class="form-title">Register a new product</div>
+            <hr>
+            <form method="post" novalidate>
+
+                <div class="line">
+                    <div asp-validation-summary="ModelOnly" class="error-text"></div>
+                </div>
+
+                <div class="line">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" required />
+                    <span asp-validation-for="Name" class="error-text"></span>
+                </div>
+
+                <div class="line">
+                    <label asp-for="Description"></label>
+                    <textarea asp-for="Description" required></textarea>
+                    <span asp-validation-for="Description" class="error-text"></span>
+                </div>
+
+                <div class="line ">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" type="number" required />
+                    <span asp-validation-for="Price" class="error-text"></span>
+                </div>
+
+                @*                <div class="line">
+                <label asp-for="LgImgUrl"></label>
+                <input asp-for="LgImgUrl" />
+                <span asp-validation-for="LgImgUrl" class="error-text"></span>
+                </div>
+                <div class="line">
+                <label asp-for="SmImgUrl"></label>
+                <input asp-for="SmImgUrl" required />
+                <span asp-validation-for="SmImgUrl" class="error-text"></span>
+                </div>*@
+
+                <button class="btn-theme" type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+</section>

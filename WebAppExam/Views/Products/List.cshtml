@@ -1,0 +1,84 @@
+﻿@model ProductListViewModel
+
+<partial name="/Views/Partials/_ProductHeader.cshtml" />
+
+<section class="register-form">
+    <div class="container">
+        <div class="form-content">
+            <div class="form-title">Product List</div>
+            <hr>
+            <div class="mb-2">Here are the products in the database.</div>
+            <div asp-validation-summary="ModelOnly" class="error-text"></div>
+            @if (Model.Products != null)
+            {
+                foreach (var product in Model.Products)
+                {
+                    var price = (product.Price).ToString("0.00");
+
+                    <div class="d-flex justify-content-between align-items-center mb-2 ps-3 pe-1 py-1 list-row">
+                        <div>
+                            <span class="fw-bold">Id:</span> @product.Id ,
+                            <span class="fw-bold">Name:</span> @product.Name ,
+                            <span class="fw-bold">Price:</span> $@price
+                            <span class="fw-bold">Description:</span> @product.Description
+
+                            @if(product.Categories.Count > 0)
+                            {
+                                <span class="fw-bold">Category:</span>
+
+                                @foreach(var category in product.Categories)
+                                {
+                                    @category.CategoryName.Trim();
+                                    
+                                    @if (category != product.Categories.Last())
+                                    {
+                                        <span>, </span>
+                                    }
+                                }                           
+                            }
+                        </div>
+                        <div class="d-flex">
+                            @if (product.LgImgUrl != null)
+                            {
+                                <div class="fw-bold me-2">
+                                    LG:
+                                    <div style="width: 50px; height: 50px; overflow: hidden;" class="d-flex justify-content-center align-items-center">
+                                        <img src="@product.LgImgUrl" style="object-fit:cover; width: 100%; height: 100%; " />
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="d-grid me-2">
+                                    <span class="fw-bold">LG: </span> No image!
+                                </div>
+                            }
+
+                            @if(product.SmImgUrl != null)
+                            {
+                                <div class="fw-bold">SM: 
+                                    <div style="width: 50px; height: 50px; overflow: hidden;" class="d-flex justify-content-center align-items-center">
+                                        <img src="@product.SmImgUrl" style="object-fit:cover; width: 100%; height: 100%; "/>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="d-grid">
+                                    <span class="fw-bold">SM: </span> No image!
+                                </div>
+                            }
+
+                            <form method="post" novalidate>
+                                <input type="hidden" asp-for="Title" value="@Model.Title" />
+                                <input type="hidden" asp-for="Products" value="@Model.Products" />
+                                <input type="hidden" asp-for="ProductId" value="@product.Id" />
+                                <button type="submit" class="btn-theme ms-3" style="padding: 0.5rem;">X</button>
+                            </form>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</section>

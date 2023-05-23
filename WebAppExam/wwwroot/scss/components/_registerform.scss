@@ -1,0 +1,110 @@
+﻿@import '../core/_colors.scss';
+@import '../core/_fonts.scss';
+@import '../core/_mixins.scss';
+
+.registerform {
+    padding-top: 40px;
+    padding-bottom: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: $font-roboto;
+
+    @include lg {
+        padding-top: 80px;
+    }
+
+    .form-content {
+        background: $color-white;
+        color: $color-dark-2;
+        width: 100%;
+        padding: 30px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+        @include sm {
+            padding: 50px;
+        }
+
+        hr {
+            width: 60px;
+            margin-top: 0.3rem;
+            border-color: $color-dark-2;
+        }
+
+        form {
+
+            label {
+                margin-bottom: 5px;
+            }
+
+            .grid {
+                gap: 1rem;
+
+                @include lg {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                }
+
+                .column {
+                    display: grid;
+                }
+            }
+
+            .line {
+                display: grid;
+                margin-bottom: 1rem;
+
+                a {
+                    color: $color-theme-1;
+                    font-size: 14px;
+
+                    &:hover {
+                        color: $color-dark-1;
+                    }
+                }
+
+                input,
+                textarea,
+                select {
+                    padding: 5px 10px;
+                    border: none;
+                    background: #FAFAFA;
+                    font-family: $font-poppins;
+                    resize: none;
+
+                    &:focus {
+                        outline-color: #f2d8d8;
+                    }
+                }
+
+                input[type="file"] {
+                    padding: 10px;
+                }
+
+                .email-content {
+                    display: flex;
+                    justify-content: space-between;
+
+                    @include lg {
+                        display: block;
+                    }
+
+                    a {
+                        margin-left: 1.5rem;
+                    }
+                }
+
+                .password-content {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+
+            button {
+                display: block;
+                margin-top: 30px;
+            }
+        }
+    }
+}

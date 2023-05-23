@@ -1,0 +1,63 @@
+﻿@using WebAppExam.ViewModels;
+@model ContactFormViewModel
+
+<section class="contactform">
+    <div class="container">
+        <div class="form-content">
+            <div class="form-title">Write something</div>
+            <hr>
+            <form method="post" onsubmit="validateAllContact(event)" novalidate>
+                @*<div asp-validation-summary="ModelOnly" id="contact-asp-validation" class="error-text-asp"></div>*@
+
+                <div asp-validation-summary="ModelOnly" class="alert alert-danger no-bullets"></div>
+                @if (TempData["SuccessMessage"] != null)
+                {
+                    <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                }
+
+                <div class="grid">
+                    <div class="col name">
+                        <label asp-for="FullName"></label>
+                        <input asp-for="FullName" onkeyup="validateInput(event)" id="contact-full-name" required />
+                        <span asp-validation-for="FullName" id="contact-full-name-span" class="error-text"></span>
+                        <div id="contact-full-name-error" class="error-text"></div>
+                    </div>
+                    <div class="col email">
+                        <label asp-for="Email"></label>
+                        <input asp-for="Email" onkeyup="validateInput(event)" id="contact-email" required />
+                        <span asp-validation-for="Email" id="contact-email-span" class="error-text"></span>
+                        <div id="contact-email-error" class="error-text"></div>
+                    </div>
+                    <div class="col phone-number">
+                        <label asp-for="PhoneNumber"></label>
+                        <input asp-for="PhoneNumber" onkeyup="validateInput(event)" id="contact-phone-number" required />
+                        <span asp-validation-for="PhoneNumber" id="contact-phone-number-span" class="error-text"></span>
+                        <div id="contact-phone-number-error" class="error-text"></div>
+                    </div>
+                    <div class="col company">
+                        <label asp-for="CompanyName"></label>
+                        <input asp-for="CompanyName" onkeyup="validateInput(event)" id="contact-company" required />
+                    </div>
+                </div>
+
+                <div class="text-area">
+                    <label asp-for="Comment"></label>
+                    <textarea asp-for="Comment" onkeyup="validateInput(event)" id="contact-comment" required></textarea>
+                    <span asp-validation-for="Comment" id="contact-comment-span" class="error-text"></span>
+                    <div id="contact-comment-error" class="error-text"></div>
+                </div>
+
+                @* DONT HAVE FUNCTIONALITY YET!
+                <label class="custom-checkbox">
+                Save my name, email, and website in this browser for the next time I comment.
+                <input type="checkbox" checked="checked">
+                <span class="checkmark"></span>
+                </label>*@
+
+                <button class="btn-theme" onclick="" type="submit">Submit</button>
+                <div id="form-error" class="error-text mt-2"></div>
+
+            </form>
+        </div>
+    </div>
+</section>

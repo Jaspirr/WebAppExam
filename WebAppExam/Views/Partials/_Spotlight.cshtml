@@ -1,0 +1,17 @@
+﻿@model SpotlightViewModel
+
+<section class="spotlight">
+    <div class="container">
+
+        @if (Model.SpotlightItem != null)
+        {
+            <div class="row row-cols-3">
+
+                @foreach (var card in Model.SpotlightItem)
+                {
+                    <partial name="/Views/Partials/_SpotlightItem.cshtml" model="card" />
+                }
+            </div>
+        }
+    </div>
+</section>

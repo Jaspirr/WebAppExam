@@ -1,0 +1,147 @@
+﻿@import '../core/_colors.scss';
+@import '../core/_fonts.scss';
+@import '../core/_mixins.scss';
+
+.readmore {
+
+    .container {
+    }
+
+    .btn-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0;
+        border: $color-dark-4 1px solid;
+        margin-bottom: 30px;
+
+        @include lg {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: 1fr;
+            gap: 0;
+        }
+
+        button {
+            width: 100%;
+            max-width: inherit;
+            border-color: transparent;
+            border-right: $color-dark-4 1px solid;
+            padding: 10px 25px;
+
+            &:nth-child(-n+2) {
+                border-bottom: $color-dark-4 1px solid;
+            }
+
+            &:nth-child(even) {
+                border-right: none;
+            }
+
+            @include lg {
+                padding: 10px 35px;
+
+                &:nth-child(-n+2) {
+                    border-bottom: transparent;
+                }
+
+                &:nth-child(even) {
+                    border-right: $color-dark-4 1px solid;
+                }
+
+                &:last-child {
+                    border-right: none;
+                }
+            }
+
+            &:hover {
+                background: $color-theme-1;
+            }
+
+            &:focus {
+                background: $color-theme-1;
+                color: $color-white;
+            }
+        }
+    }
+
+    .title {
+        font-family: $font-poppins;
+        font-size: 24px;
+        font-weight: $font-weight-semibold;
+        color: $color-dark-1;
+        margin-bottom: 1rem;
+        text-align: left;
+        text-align: center;
+        max-width: 700px;
+
+        @include lg {
+            max-width: inherit;
+        }
+
+        @include lg {
+            text-align: left;
+        }
+    }
+
+    .text-area {
+        width: 100%;
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+
+        @include sm {
+            align-items: center;
+        }
+
+        @include lg {
+            display: grid;
+            grid-template-columns: auto minmax(auto, 469px);
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .text {
+            font-family: $font-roboto;
+            color: $color-dark-2;
+            max-width: 469px;
+
+            @include lg {
+                max-width: inherit;
+                width: 100%;
+            }
+        }
+
+        .img-holder {
+            max-width: 469px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1rem;
+
+            @include lg {
+                margin-bottom: 0rem;
+            }
+
+            img {
+                width: 100%;
+                object-fit: cover;
+            }
+
+            &:after {
+                content: "New";
+                position: absolute;
+                background-color: $color-theme-1;
+                color: $color-white;
+                font-size: 14px;
+                padding: 50px 55px 10px 55px;
+                transform: rotate(45deg);
+                right: -55px;
+                top: -25px;
+            }
+        }
+    }
+
+    hr {
+        margin-top: 3rem;
+        margin-bottom: 0;
+    }
+}

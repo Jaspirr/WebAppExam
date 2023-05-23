@@ -1,0 +1,17 @@
+﻿@model SpotlightItemViewModel
+
+<div class="col">
+    <div class="card">
+        <div class="img-holder">
+            <img src="@Model.ImageUrl" class="card-img-top" alt="@Model.Title">
+        </div>
+        <div class="card-body">
+            <a class="card-link" asp-controller="products" asp-action="details" asp-route-id="@Model.Id">@Model.Title</a>
+            <p class="card-text">@Model.Description</p>
+            <div class="info-holder d-flex">
+                <p class="card-post">POST BY: @Model.UserName.ToUpper()</p>
+                <p class="card-comment">COMMENTS @Model.CommentsTotal</p>
+            </div>
+        </div>
+    </div>
+</div>
