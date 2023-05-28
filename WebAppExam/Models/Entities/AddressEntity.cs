@@ -7,6 +7,6 @@
         public string PostalCode { get; set; } = null!;
         public string City { get; set; } = null!;
 
-        public ICollection<UserProfileEntity> UserProfile = new HashSet<UserProfileEntity>();
+        public ICollection<UserProfileEntity> UserProfiles = new HashSet<UserProfileEntity>();
     }
 }
