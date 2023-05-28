@@ -4,11 +4,7 @@
 <section class="contactform">
     <div class="container">
         <div class="form-content">
-            <div class="form-title">Write something</div>
-            <hr>
             <form method="post" onsubmit="validateAllContact(event)" novalidate>
-                @*<div asp-validation-summary="ModelOnly" id="contact-asp-validation" class="error-text-asp"></div>*@
-
                 <div asp-validation-summary="ModelOnly" class="alert alert-danger no-bullets"></div>
                 @if (TempData["SuccessMessage"] != null)
                 {
@@ -47,12 +43,6 @@
                     <div id="contact-comment-error" class="error-text"></div>
                 </div>
 
-                @* DONT HAVE FUNCTIONALITY YET!
-                <label class="custom-checkbox">
-                Save my name, email, and website in this browser for the next time I comment.
-                <input type="checkbox" checked="checked">
-                <span class="checkmark"></span>
-                </label>*@
 
                 <button class="btn-theme" onclick="" type="submit">Submit</button>
                 <div id="form-error" class="error-text mt-2"></div>

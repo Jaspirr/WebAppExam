@@ -7,7 +7,7 @@ namespace WebAppExam.Models.Entities;
 public class ProfileEntity
 {
     [Key, ForeignKey("User")]
-    public int UserId { get; set; }
+    public string UserId { get; set; } = null!;
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
 

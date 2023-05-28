@@ -10,7 +10,7 @@ public class ShowcaseService
         {
             Ingress = "WELCOME TO BMERKETO SHOP",
             Title = "Exclusive Plants Collection.",
-            ImageUrl = "images/placeholder/625x647.svg",
+            ImageUrl = "images/products/showcasevegie.jpg",
             Button = new LinkButtonModel
             {
                 Content = "SHOP NOW",
@@ -20,8 +20,8 @@ public class ShowcaseService
         new ShowcaseModel()
         {
             Ingress = "BMERKETO THE BEST A PERSON CAN GET",
-            Title = "Always fresh",
-            ImageUrl = "images/placeholder/625x647.svg",
+            Title = "Best on the market",
+            ImageUrl = "images/products/showcasevegie.jpg",
             Button = new LinkButtonModel
             {
                 Content = "SHOP NOW",

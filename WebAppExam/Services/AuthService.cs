@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Security.Claims;
 using WebAppExam.Contexts;
 using WebAppExam.Models.Entities;
@@ -60,14 +61,31 @@ public class AuthService
                 userProfileEntity.AddressId = addressEntity.Id;
             }
 
-            _identityContext.UserProfiles.Add(userProfileEntity);
+            // Konvertera UserProfileEntity till ProfileEntity
+            ProfileEntity profileEntity = new ProfileEntity
+            {
+                UserId = userProfileEntity.UserId,
+                FirstName = userProfileEntity.FirstName,
+                LastName = userProfileEntity.LastName,
+                StreetName = userProfileEntity.Address.StreetName,
+                PostalCode = userProfileEntity.Address.PostalCode,
+                City = userProfileEntity.Address.City,
+                CompanyName = userProfileEntity.CompanyName,
+                ProfileImage = userProfileEntity.ProfileImage,
+                Address = userProfileEntity.Address
+            };
+
+            _identityContext.UserProfiles.Add(profileEntity);
             await _identityContext.SaveChangesAsync();
 
             return true;
         }
-        catch { return false; }
+        catch
+        {
+            return false;
+        }
     }
-
+    
     public async Task<bool> RegisterAsync(UserRegisterViewModel viewModel)
     {
         try
@@ -95,12 +113,29 @@ public class AuthService
                 userProfileEntity.AddressId = addressEntity.Id;
             }
 
-            _identityContext.UserProfiles.Add(userProfileEntity);
+            // Konvertera UserProfileEntity till ProfileEntity
+            ProfileEntity profileEntity = new ProfileEntity
+            {
+                UserId = userProfileEntity.UserId,
+                FirstName = userProfileEntity.FirstName,
+                LastName = userProfileEntity.LastName,
+                StreetName = userProfileEntity.Address.StreetName,
+                PostalCode = userProfileEntity.Address.PostalCode,
+                City = userProfileEntity.Address.City,
+                CompanyName = userProfileEntity.CompanyName,
+                ProfileImage = userProfileEntity.ProfileImage,
+                Address = userProfileEntity.Address
+            };
+
+            _identityContext.UserProfiles.Add(profileEntity);
             await _identityContext.SaveChangesAsync();
 
             return true;
         }
-        catch { return false; }
+        catch
+        {
+            return false;
+        }
     }
 
     public async Task<bool> LoginAsync(LoginViewModel viewModel)

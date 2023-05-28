@@ -4,6 +4,7 @@ using WebAppExam.ViewModels;
 
 namespace WebAppExam.Controllers
 {
+
     public class UserController : Controller
     {
         public readonly UserService _userService;
