@@ -1,0 +1,76 @@
+﻿@import '../core/_colors.scss';
+@import '../core/_fonts.scss';
+@import '../core/_mixins.scss';
+
+.inspo {
+	background: $color-theme-3;
+
+	.container {
+		padding-top: 50px;
+		padding-bottom: 50px;
+
+		@include lg {
+			padding-top: 80px;
+			padding-bottom: 80px;
+		}
+	}
+
+	.row {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+
+		@include lg {
+			justify-content: space-between;
+		}
+	}
+
+	.col {
+		width: 200px;
+		padding: 0;
+
+		&:nth-child(n+5) {
+			display: none;
+		}
+
+		@media (min-width: 416px) {
+			&:nth-child(n+5) {
+				display: block;
+			}
+		}
+
+		@include lg {
+			&:nth-child(n+5) {
+				display: none;
+			}
+		}
+
+		@include xl {
+			&:nth-child(n+5) {
+				display: block;
+			}
+
+			&:last-child {
+				display: none;
+			}
+		}
+
+		@include xxl {
+			&:last-child {
+				display: block;
+			}
+		}
+
+		.img-holder {
+			overflow: hidden;
+
+			img {
+				transition: 0.3s ease-in-out;
+
+				&:hover {
+					transform: scale(1.05);
+				}
+			}
+		}
+	}
+}

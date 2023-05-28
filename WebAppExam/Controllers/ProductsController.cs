@@ -11,13 +11,13 @@ namespace WebAppExam.Controllers
     {
         private readonly ProductService _productService;
         private readonly CheckboxOptionService _checkBoxOptionService;
-        private readonly GridCollectionCardService _gridCollectionCardService;
+        private readonly GridCollectionItemService _gridCollectionItemService;
 
-        public ProductsController(ProductService productService, CheckboxOptionService checkBoxOptionService, GridCollectionCardService gridCollectionCardService)
+        public ProductsController(ProductService productService, CheckboxOptionService checkBoxOptionService, GridCollectionItemService gridCollectionItemService)
         {
             _productService = productService;
             _checkBoxOptionService = checkBoxOptionService;
-            _gridCollectionCardService = gridCollectionCardService;
+            _gridCollectionItemService = gridCollectionItemService;
         }
 
         public async Task<IActionResult> Index()
@@ -29,7 +29,7 @@ namespace WebAppExam.Controllers
                 All = new GridCollectionViewModel
                 {
                     Title = "All Products",
-                    GridItems = await _gridCollectionCardService.PopulateCardsWithAllProductsAsync(),
+                    GridItems = await _gridCollectionItemService.PopulateItemsWithAllProductsAsync(),
 
                     LoadMore = false
                 }
@@ -55,15 +55,14 @@ namespace WebAppExam.Controllers
                 Same = new SameProductsViewModel
                 {
                     //HARDCODED PRODUCTS
-                    GridCards = new List<GridCollectionCardViewModel>
+                    GridItems = new List<GridCollectionItemViewModel>
                     {
-                        new GridCollectionCardViewModel{ Id = 1, Title = "Apple watch series", Price = 10, ImageUrl = "https://images.pexels.com/photos/7897470/pexels-photo-7897470.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-                        new GridCollectionCardViewModel{ Id = 2, Title = "Apple watch series", Price = 20, ImageUrl = "https://images.pexels.com/photos/1667071/pexels-photo-1667071.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-                        new GridCollectionCardViewModel{ Id = 3, Title = "Apple watch series", Price = 30, ImageUrl = "https://images.pexels.com/photos/37539/colored-pencils-colour-pencils-mirroring-color-37539.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
-                        new GridCollectionCardViewModel{ Id = 4, Title = "Apple watch series", Price = 40, ImageUrl = "https://images.pexels.com/photos/90946/pexels-photo-90946.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" },
+                        new GridCollectionItemViewModel{ Id = 1, Title = "PLACEHOLDER", Price = 10, ImageUrl = "product.jpg" },
+                        new GridCollectionItemViewModel{ Id = 2, Title = "PLACEHOLDER", Price = 20, ImageUrl = "product.jpg" },
+                        new GridCollectionItemViewModel{ Id = 3, Title = "PLACEHOLDER", Price = 30, ImageUrl = "product.jpg" },
+                        new GridCollectionItemViewModel{ Id = 4, Title = "PLACEHOLDER", Price = 40, ImageUrl = "product.jpg" },
                     }
                 },
-                Test = id
             };
 
             if (await _productService.GetAsync(x => x.Id == id) == null) { return RedirectToAction("index", "home"); }
@@ -73,6 +72,7 @@ namespace WebAppExam.Controllers
             ViewData["Title"] = viewModel.Title;
             return View(viewModel);
         }
+
 
         //----PRODUCT LIST----
         [Authorize(Roles = "admin")]
@@ -114,7 +114,6 @@ namespace WebAppExam.Controllers
         }
 
 
-        //----REGISTER PRODUCT----
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> Register()
         {

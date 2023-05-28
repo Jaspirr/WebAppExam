@@ -31,7 +31,6 @@ public class ProductEntity
             Price = productEntity.Price,
             LgImgUrl = productEntity.LgImgUrl!,
             SmImgUrl = productEntity.SmImgUrl!,
-            //Categories = productEntity.Categories.Select(x => x.Name)
         };
     }
 
@@ -39,13 +38,11 @@ public class ProductEntity
     {
         return new ProductEntity
         {
-            //Id = productModel.Id,
             Name = productModel.Name,
             Description = productModel.Description,
             Price = productModel.Price,
             LgImgUrl = productModel.LgImgUrl,
             SmImgUrl = productModel.SmImgUrl,
-            //Categories = productModel.Categories.Select(x => x.Name)
         };
     }
 }

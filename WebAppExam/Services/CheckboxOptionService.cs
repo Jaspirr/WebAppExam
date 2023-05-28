@@ -32,23 +32,4 @@ public class CheckboxOptionService
 
         return checkboxes;
     }
-
-    public async Task<List<CheckboxOptionModel>> PopulateRoleCheckBoxesAsync()
-    {
-        var checkboxes = new List<CheckboxOptionModel>();
-        var roles = await _roleService.GetRolesAsync();
-
-        foreach (var role in roles)
-        {
-            var checkbox = new CheckboxOptionModel
-            {
-                Description = role.Name!,
-                Value = role.Id
-            };
-
-            checkboxes.Add(checkbox);
-        }
-
-        return checkboxes;
-    }
 }

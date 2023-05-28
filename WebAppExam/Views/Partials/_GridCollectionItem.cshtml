@@ -1,12 +1,23 @@
 ﻿@model GridCollectionItemViewModel
 
-<a asp-controller="products" asp-action="details" asp-route-id="@Model.Id" class="collection-item">
-    <img src="@Model.ImageUrl" alt="@Model.Title">
-    <div class="body">
-        <div class="title">@Model.Title</div>
-        <div class="info">
-            <div class="price">$@Model.Price</div>
-            <i class="add-cart fa-regular fa-cart-plus"></i>
+@{
+    var price = (Model.Price).ToString("0.00");
+}
+
+<div class="col">
+    <div class="card">
+        <div class="img-holder">
+            <a asp-controller="products" asp-action="details" asp-route-id="@Model.Id">
+                <img src="/images/products/@Model.ImageUrl" class="card-img-top" alt="@Model.Title">
+            </a>
+
+        </div>
+        <div class="card-body">
+            <div>
+                <a class="card-link" asp-controller="products" asp-action="details" asp-route-id="@Model.Id">@Model.Title</a>
+                <p class="card-text">$@price</p>
+            </div>
+            <a class="card-icon" href="#"><i class="fa-regular fa-cart-plus"></i></a>
         </div>
     </div>
-</a>
+</div>

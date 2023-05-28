@@ -40,7 +40,6 @@ namespace WebAppExam.Controllers
 
                 var roleModel = await _roleService.GetSpecificUserRolesAsync(_identityUser.Id);
 
-                //This also makes the first letter in roleModel.RoleName to be capitalized:
                 viewModel.User.Role = char.ToUpper(roleModel.RoleName[0]) + roleModel.RoleName.Substring(1);
 
                 ViewData["Title"] = viewModel.Title;

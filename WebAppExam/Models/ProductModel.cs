@@ -14,9 +14,9 @@ namespace WebAppExam.Models
 
         public List<ProductCategoryModel> Categories = new();
 
-        public static implicit operator GridCollectionCardViewModel(ProductModel model)
+        public static implicit operator GridCollectionItemViewModel(ProductModel model)
         {
-            return new GridCollectionCardViewModel
+            return new GridCollectionItemViewModel
             {
                 Id = model.Id,
                 Title = model.Name,

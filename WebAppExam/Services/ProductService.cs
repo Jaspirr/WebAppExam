@@ -11,33 +11,25 @@ namespace WebAppExam.Services
     {
         private readonly ProductContext _productContext;
         private readonly CategoryService _categoryService;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public ProductService(ProductContext context, CategoryService categoryService)
+        public ProductService(ProductContext context, CategoryService categoryService, IWebHostEnvironment webHostEnvironment)
         {
             _productContext = context;
             _categoryService = categoryService;
+            _webHostEnvironment = webHostEnvironment;
         }
-
-        //public async Task<bool> UserExist(Expression<Func<UserEntity, bool>> predicate)
-        //{
-        //	if (await _context.Users.AnyAsync(predicate))
-        //		return true;
-
-        //	return false;
-        //}
 
         public async Task<bool> RegisterAsync(ProductRegisterViewModel viewModel)
         {
             try
             {
-                //converts to entity
                 ProductEntity productEntity = viewModel;
 
-                //create product
                 _productContext.Products.Add(productEntity);
                 await _productContext.SaveChangesAsync();
 
-                //---WITH MULTIPLE CATEGORY---
+                //---WITH MULTIPLE CATEGORIES---
                 if (viewModel.CheckboxCategoryId.Any())
                 {
                     foreach (var categoryId in viewModel.CheckboxCategoryId)
@@ -57,6 +49,10 @@ namespace WebAppExam.Services
                 }
 
                 await _productContext.SaveChangesAsync();
+
+                //Upload Image:
+                if (await UploadImageAsync(productEntity, viewModel.ImageLg!, viewModel.ImageSm!) != true)
+                    return false;
 
                 return true;
             }
@@ -84,7 +80,6 @@ namespace WebAppExam.Services
 
             return products;
         }
-
 
         public async Task<bool> RemoveAsync(int productId)
         {
@@ -140,6 +135,27 @@ namespace WebAppExam.Services
             }
 
             return products;
+        }
+
+        public async Task<bool> UploadImageAsync(ProductEntity product, IFormFile imageLg, IFormFile imageSm)
+        {
+            try
+            {
+                if (product.LgImgUrl != null)
+                {
+                    string imagePath = $"{_webHostEnvironment.WebRootPath}/images/products/{product.LgImgUrl}";
+                    await imageLg.CopyToAsync(new FileStream(imagePath, FileMode.Create));
+                }
+
+                if (product.SmImgUrl != null)
+                {
+                    string imagePath = $"{_webHostEnvironment.WebRootPath}/images/products/{product.SmImgUrl}";
+                    await imageSm.CopyToAsync(new FileStream(imagePath, FileMode.Create));
+                }
+
+                return true;
+            }
+            catch { return false; }
         }
     }
 }

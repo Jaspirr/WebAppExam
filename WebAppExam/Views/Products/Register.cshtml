@@ -2,47 +2,76 @@
 
 <partial name="/Views/Partials/_ProductHeader.cshtml" />
 
-<section class="registerform">
+<section class="register-form">
     <div class="container">
         <div class="form-content">
-            <div class="form-title">Register a new product</div>
+            <div class="form-title">Add a new product</div>
             <hr>
-            <form method="post" novalidate>
+            <form enctype="multipart/form-data" method="post" onsubmit="validateAllProduct(event)" novalidate>
 
                 <div class="line">
-                    <div asp-validation-summary="ModelOnly" class="error-text"></div>
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger no-bullets"></div>
                 </div>
 
                 <div class="line">
                     <label asp-for="Name"></label>
-                    <input asp-for="Name" required />
-                    <span asp-validation-for="Name" class="error-text"></span>
+                    <input asp-for="Name" onkeyup="validateInput(event)" id="product-name" required />
+                    <span asp-validation-for="Name" id="product-name-span" class="error-text"></span>
+                    <div id="product-name-error" class="error-text"></div>
                 </div>
 
                 <div class="line">
                     <label asp-for="Description"></label>
-                    <textarea asp-for="Description" required></textarea>
-                    <span asp-validation-for="Description" class="error-text"></span>
+                    <textarea asp-for="Description" onkeyup="validateInput(event)" id="product-description" required></textarea>
+                    <span asp-validation-for="Description" id="product-description-span" class="error-text"></span>
+                    <div id="product-description-error" class="error-text"></div>
                 </div>
 
                 <div class="line ">
                     <label asp-for="Price"></label>
-                    <input asp-for="Price" type="number" required />
-                    <span asp-validation-for="Price" class="error-text"></span>
+                    <input asp-for="Price" type="number" min="0" onkeyup="validateInput(event)" id="product-price" required />
+                    <span asp-validation-for="Price" id="product-price-span" class="error-text"></span>
+                    <div id="product-price-error" class="error-text"></div>
+
                 </div>
 
-                @*                <div class="line">
-                <label asp-for="LgImgUrl"></label>
-                <input asp-for="LgImgUrl" />
-                <span asp-validation-for="LgImgUrl" class="error-text"></span>
+                @* --------------select MULTIPLE categories!-------------- *@
+                <label>Product Category*</label>
+                @foreach (var checkbox in Model.Checkboxes)
+                {
+                    <div class="form-check">
+                        <label class="custom-checkbox" for="checkbox_@checkbox.Value">
+
+                            @*Makes the first letter in @checkbox.Description to be capitalized*@
+                            @(char.ToUpper(checkbox.Description[0]) + checkbox.Description.Substring(1))
+
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   value="@checkbox.Value"
+                                   name="CheckboxCategoryId"
+                                   id="checkbox_@checkbox.Value"
+                                   checked="@checkbox.IsChecked">
+
+                            <span class="checkmark"></span>
+                        </label>
+                    </div>
+                }
+                @* --------------select MULTIPLE categories!-------------- *@
+
+                <div class="line mt-4">
+                    <label asp-for="ImageLg"></label>
+                    <input asp-for="ImageLg" class="form-control" />
+                    <span asp-validation-for="ImageLg" class="error-text"></span>
                 </div>
+
                 <div class="line">
-                <label asp-for="SmImgUrl"></label>
-                <input asp-for="SmImgUrl" required />
-                <span asp-validation-for="SmImgUrl" class="error-text"></span>
-                </div>*@
+                    <label asp-for="ImageSm"></label>
+                    <input asp-for="ImageSm" class="form-control" />
+                    <span asp-validation-for="ImageSm" class="error-text"></span>
+                </div>
 
-                <button class="btn-theme" type="submit">Submit</button>
+                <button class="btn-theme" type="submit" id="btn-product-submit">Submit</button>
+                <div id="form-error" class="error-text mt-2"></div>
             </form>
         </div>
     </div>

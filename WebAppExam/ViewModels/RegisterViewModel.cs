@@ -65,25 +65,25 @@ namespace WebAppExam.ViewModels
             };
         }
 
-        public static implicit operator ProfileEntity(RegisterViewModel viewModel)
+        public static implicit operator UserProfileEntity(RegisterViewModel viewModel)
         {
-            return new ProfileEntity
+            return new UserProfileEntity
             {
                 FirstName = viewModel.FirstName,
                 LastName = viewModel.LastName,
-                StreetName = viewModel.StreetName,
-                PostalCode = viewModel.PostalCode,
-                City = viewModel.City,
                 CompanyName = viewModel.CompanyName,
-                ProfileImage = viewModel.ProfileImage
+                ProfileImage = viewModel.ProfileImage,
             };
         }
 
-        public static implicit operator UserEntity(RegisterViewModel viewModel)
+        public static implicit operator AddressEntity(RegisterViewModel viewModel)
         {
-            var userEntity = new UserEntity { Email = viewModel.Email };
-            userEntity.GenererateSecurePassword(viewModel.Password);
-            return userEntity;
+            return new AddressEntity
+            {
+                StreetName = viewModel.StreetName,
+                PostalCode = viewModel.PostalCode,
+                City = viewModel.City
+            };
         }
     }
 }

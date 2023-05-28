@@ -19,14 +19,12 @@ public class UserService
         _roleService = roleService;
     }
 
-    public async Task<ProfileEntity> GetUserProfileAsync(string Id)
+    public async Task<UserProfileEntity> GetUserProfileAsync(string userId)
     {
-        var ProfileEntity = await _identityContext.UserProfiles
-            .Include(x => x.User)
-            .FirstOrDefaultAsync(x => x.Id == Id);
-
-        return ProfileEntity!;
+        var userProfileEntity = await _identityContext.UserProfiles.Include(x => x.User).Include(x => x.Address).FirstOrDefaultAsync(x => x.UserId == userId);
+        return userProfileEntity!;
     }
+
 
     public async Task<IdentityUser> GetIdentityUserAsync(string email)
     {

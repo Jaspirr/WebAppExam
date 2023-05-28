@@ -1,0 +1,78 @@
+﻿@model ProductModel
+@{
+    var price = (Model.Price).ToString("0.00");
+}
+
+<!-- product-details start -->
+<section class="productdetails">
+    <div class="container">
+        <div class="grid">
+            <div class="big-img">
+                <div class="img-holder">
+                    <img src="/images/products/@Model.LgImgUrl" />
+                </div>
+            </div>
+            <div class="small-img">
+                <div class="img-holder">
+                    <img src="/images/products/@Model.SmImgUrl" />
+                </div>
+                <div class="img-holder">
+                    <img src="/images/products/@Model.SmImgUrl" />
+                </div>
+                <div class="img-holder">
+                    <img src="/images/products/@Model.SmImgUrl" />
+                </div>
+                <div class="img-holder">
+                    <img src="/images/products/@Model.SmImgUrl" />
+                </div>
+            </div>
+            <div class="product-text">
+                <div class="product-name">@Model.Name</div>
+                <div class="product-description">@Model.Description Lirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed
+                    diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd
+                    gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+                <hr>
+                <div class="review">
+                    <div class="star-holder">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                    </div>
+                    <a class="link review-count" href="#">5 reviews</a>
+                </div>
+                <div class="product-price">$@price</div>
+                <div class="btn-holder">
+                    <div class="qty-counter">
+                        <button class="minus-btn">-</button>
+                        <div class="qty">1</div>
+                        <button class="plus-btn">+</button>
+                    </div>
+                    <button class="btn-theme">Add to Cart <i class="fa-regular fa-cart-plus"></i></button>
+                </div>
+                <div class="d-flex">
+                    <div class="in-stock-indicator">
+                        <div class="out-of-stock circle"></div>
+                        <div class="few-in-stock circle"></div>
+                        <div class="in-stock circle"></div>
+                    </div>
+                    <div class="product-sku">SKU: N/A</div>
+                </div>
+                <button class="btn-white">Add to wishlist</button>
+
+                @if(Model.Categories.Count != 0)
+                {
+                    <div class="d-flex">
+                        <div class="product-category me-1">Category:</div>
+                        @foreach(var category in Model.Categories)
+                        {
+                            <div class="product-category me-1">@category.CategoryName</div>
+                        }
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+</section>

@@ -10,17 +10,17 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<DataContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("Sql")));
 builder.Services.AddDbContext<IdentityContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("IdentityDatabase")));
-builder.Services.AddDbContext<ProductContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("ProductSql")));
+builder.Services.AddDbContext<ProductContext>(x => x.UseSqlServer(builder.Configuration.GetConnectionString("ProductDatabase")));
 
 builder.Services.AddScoped<ShowcaseService>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<ProductService>();
-builder.Services.AddScoped<SeedService>();
 builder.Services.AddScoped<RoleService>();
+builder.Services.AddScoped<SeedService>();
 builder.Services.AddScoped<CategoryService>();
 builder.Services.AddScoped<CheckboxOptionService>();
-builder.Services.AddScoped<GridCollectionCardService>();
+builder.Services.AddScoped<GridCollectionItemService>();
 builder.Services.AddScoped<ContactService>();
 
 

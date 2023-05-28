@@ -1,12 +1,12 @@
-﻿namespace WebAppExam.Models.Entities;
-
-public class AddressEntity
+﻿namespace WebAppExam.Models.Entities
 {
-    public int Id { get; set; }
-    public string StreetName { get; set; } = null!;
-    public string PostalCode { get; set; } = null!;
-    public string City { get; set; } = null!;
+    public class AddressEntity
+    {
+        public int Id { get; set; }
+        public string StreetName { get; set; } = null!;
+        public string PostalCode { get; set; } = null!;
+        public string City { get; set; } = null!;
 
-    public ICollection<ProfileEntity> UserProfiles = new HashSet<ProfileEntity>();
+        public ICollection<UserProfileEntity> UserProfile = new HashSet<UserProfileEntity>();
+    }
 }
-

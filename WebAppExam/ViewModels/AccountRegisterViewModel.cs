@@ -36,10 +36,12 @@ namespace WebAppExam.ViewModels
         [RegularExpression(@"/^(?=.{7})\+?\d[\d\s-]*\d$/", ErrorMessage = "Please enter a valid phone number or no phone number at all.")]
         public string? PhoneNumber { get; set; }
 
+        [Display(Name = "Profile Image Web Url (optional)")]
+        public string? ProfileImage { get; set; }
+
 
         [Display(Name = "Company (optional)")]
         public string? CompanyName { get; set; }
-
 
         [Display(Name = "E-mail*")]
         [DataType(DataType.EmailAddress)]
@@ -62,9 +64,6 @@ namespace WebAppExam.ViewModels
         public string ConfirmPassword { get; set; } = null!;
 
 
-        [Display(Name = "Profile Image Web Url (optional)")]
-        public string? ProfileImage { get; set; }
-
         [Required(ErrorMessage = "Please Accept the Terms.")]
         public bool AcceptsTerms { get; set; } = false;
 
@@ -78,18 +77,6 @@ namespace WebAppExam.ViewModels
                 PhoneNumber = viewModel.PhoneNumber,
             };
         }
-
-        public static implicit operator ProfileEntity(AccountRegisterViewModel viewModel)
-        {
-            return new ProfileEntity
-            {
-                FirstName = viewModel.FirstName,
-                LastName = viewModel.LastName,
-                CompanyName = viewModel.CompanyName,
-                ProfileImage = viewModel.ProfileImage,
-            };
-        }
-
         public static implicit operator AddressEntity(AccountRegisterViewModel viewModel)
         {
             return new AddressEntity
@@ -97,6 +84,16 @@ namespace WebAppExam.ViewModels
                 StreetName = viewModel.StreetName,
                 PostalCode = viewModel.PostalCode,
                 City = viewModel.City
+            };
+        }
+        public static implicit operator UserProfileEntity(AccountRegisterViewModel viewModel)
+        {
+            return new UserProfileEntity
+            {
+                FirstName = viewModel.FirstName,
+                LastName = viewModel.LastName,
+                CompanyName = viewModel.CompanyName,
+                ProfileImage = viewModel.ProfileImage,
             };
         }
     }

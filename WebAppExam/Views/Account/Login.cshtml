@@ -2,31 +2,41 @@
 @{
     ViewData["Title"] = "Login";
 }
-<div class="d-flex justify-content-center" style="padding-top: 80px; padding-bottom: 50px">
-    <div class="col-6">
+<section class="loginform">
+    <div class="container">
+        <div class="form-content">
+            <div class="form-title"> Login </div>
+            <hr>
+            <form method="post" onsubmit="validateAllLogin(event)" novalidate>
 
-        <form method="post" novalidate>
+                <div class="line">
+                    <div asp-validation-summary="ModelOnly" class="error-text"></div>
+                </div>
 
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="line">
+                    <div class="email-content">
+                        <label asp-for="Email"></label>
+                        <a asp-controller="account" asp-action="register">Don't have an Account yet?</a>
+                    </div>
+                    <input asp-for="Email" onkeyup="validateInput(event)" id="login-email" required />
+                    <span asp-validation-for="Email" id="login-email-span" class="error-text"></span>
+                    <div id="login-email-error" class="error-text"></div>
+                </div>
 
-            <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <small><span asp-validation-for="Email" class="text-danger"></span></small>
+                <div class="line">
+                    <div class="password-content">
+                        <label asp-for="Password"></label>
+                        <a asp-controller="account" asp-action="newpassword" tabindex="-1">Forgot Your Password?</a>
+                    </div>
+                    <input asp-for="Password" onkeyup="validateInput(event)" id="login-password" required />
+                    <span asp-validation-for="Password" id="login-password-span" class="error-text"></span>
+                    <div id="login-password-error" class="error-text"></div>
+                </div>
 
-            </div>
+                <button class="btn-theme" type="submit">Submit</button>
+                <div id="form-error" class="error-text mt-2"></div>
 
-            <div class="mb-3">
-                <label asp-for="Password" class="form-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <small><span asp-validation-for="Password" class="text-danger"></span></small>
-
-            </div>
-
-            <div class="d-grid">
-                <button type="submit" class="btn btn-success mt-2">LOGIN</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-
-</div>
+</section>

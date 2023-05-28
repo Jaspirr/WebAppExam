@@ -4,30 +4,30 @@ using WebAppExam.ViewModels;
 
 namespace WebAppExam.Services;
 
-public class GridCollectionCardService
+public class GridCollectionItemService
 {
     private readonly ProductService _productService;
 
-    public GridCollectionCardService(ProductService productService)
+    public GridCollectionItemService(ProductService productService)
     {
         _productService = productService;
     }
 
-    public async Task<IEnumerable<GridCollectionCardViewModel>> PopulateCardsWithAllProductsAsync()
+    public async Task<IEnumerable<GridCollectionItemViewModel>> PopulateItemsWithAllProductsAsync()
     {
         try
         {
-            var cards = new List<GridCollectionCardViewModel>();
+            var items = new List<GridCollectionItemViewModel>();
             var products = await _productService.GetAllAsync();
 
             foreach (var product in products)
             {
-                GridCollectionCardViewModel card = product;
+                GridCollectionItemViewModel item = product;
 
-                cards.Add(card);
+                items.Add(item);
             }
 
-            return cards;
+            return items;
         }
         catch
         {
@@ -35,21 +35,21 @@ public class GridCollectionCardService
         }
     }
 
-    public async Task<IEnumerable<GridCollectionCardViewModel>> PopulateCardsByCategoryIdAsync(Expression<Func<ProductCategoryEntity, bool>> predicate)
+    public async Task<IEnumerable<GridCollectionItemViewModel>> PopulateItemsByCategoryIdAsync(Expression<Func<ProductCategoryEntity, bool>> predicate)
     {
         try
         {
-            var cards = new List<GridCollectionCardViewModel>();
+            var items = new List<GridCollectionItemViewModel>();
             var products = await _productService.GetProductsByCategoryIdAsync(predicate);
 
             foreach (var product in products)
             {
-                GridCollectionCardViewModel card = product;
+                GridCollectionItemViewModel item = product;
 
-                cards.Add(card);
+                items.Add(item);
             }
 
-            return cards;
+            return items;
         }
         catch
         {

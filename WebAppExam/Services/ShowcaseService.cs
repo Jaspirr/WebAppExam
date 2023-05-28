@@ -9,7 +9,7 @@ public class ShowcaseService
         new ShowcaseModel()
         {
             Ingress = "WELCOME TO BMERKETO SHOP",
-            Title = "Exclusive Chair gold Collection.",
+            Title = "Exclusive Plants Collection.",
             ImageUrl = "images/placeholder/625x647.svg",
             Button = new LinkButtonModel
             {
@@ -20,7 +20,7 @@ public class ShowcaseService
         new ShowcaseModel()
         {
             Ingress = "BMERKETO THE BEST A PERSON CAN GET",
-            Title = "Now with all new spices",
+            Title = "Always fresh",
             ImageUrl = "images/placeholder/625x647.svg",
             Button = new LinkButtonModel
             {

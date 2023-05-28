@@ -17,28 +17,19 @@ public class CustomClaimsPrincipalFactory : UserClaimsPrincipalFactory<IdentityU
     //Add custom claims:
     protected override async Task<ClaimsIdentity> GenerateClaimsAsync(IdentityUser user)
     {
-        var claimsIdentity = await base.GenerateClaimsAsync(user);
-
-        try
         {
-            var userProfileEntity = await _userService.GetUserProfileAsync(user.Id);
+            var claimIdentity = await base.GenerateClaimsAsync(user);
+            var profileEntity = await _userService.GetUserProfileAsync(user.Id);
 
-            if (userProfileEntity != null)
+            claimIdentity.AddClaim(new Claim("DisplayName", $"{profileEntity.FirstName} {profileEntity.LastName}"));
+
+            var roles = await UserManager.GetRolesAsync(user);
+            foreach (var role in roles)
             {
-                // Add a combined string of "FirstName LastName"
-                claimsIdentity.AddClaim(new Claim("DisplayName", $"{userProfileEntity.FirstName} {userProfileEntity.LastName}"));
-
-                // Add user roles
-                var roles = await UserManager.GetRolesAsync(user);
-                foreach (var role in roles)
-                {
-                    claimsIdentity.AddClaim(new Claim(ClaimTypes.Role, role));
-                }
-
-                return claimsIdentity;
+                claimIdentity.AddClaim(new Claim(ClaimTypes.Role, role));
             }
-            return null!;
+
+            return claimIdentity;
         }
-        catch { return null!; }
     }
 }

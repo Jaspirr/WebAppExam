@@ -1,15 +1,15 @@
 ﻿@model SpotlightViewModel
 
-<section class="spotlight">
+<section class="sptolight">
     <div class="container">
 
         @if (Model.SpotlightItem != null)
         {
             <div class="row row-cols-3">
 
-                @foreach (var card in Model.SpotlightItem)
+                @foreach (var Item in Model.SpotlightItem)
                 {
-                    <partial name="/Views/Partials/_SpotlightItem.cshtml" model="card" />
+                    <partial name="/Views/Partials/_SpotlightItem.cshtml" model="Item" />
                 }
             </div>
         }

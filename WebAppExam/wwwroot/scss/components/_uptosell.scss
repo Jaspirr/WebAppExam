@@ -3,93 +3,168 @@
 @import '../core/_mixins.scss';
 
 .uptosell {
-    background-color: $color-theme-2;
+    background-color: $color-dark-5;
     padding: 40px 20px;
-  
-    .collection-grid {
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        grid-template-areas:    "content"
-                                "item-1" 
-                                "item-2";
-        gap: 40px;
 
-        @include md {
-            grid-template-columns: repeat(2, 1fr);
-            grid-template-areas:    "content content"
-                                    "item-1 item-2";
-        }
+    .container {
+        padding-top: 45px;
+        padding-bottom: 45px;
+
         @include lg {
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-areas:    "item-1 content item-2";
+            padding-top: 80px;
+            padding-bottom: 80px;
+        }
+    }
+
+    .row {
+        gap: 45px;
+        justify-content: center;
+        margin: 0;
+
+        @include lg {
+            .last {
+                display: none;
+            }
         }
 
-        .item-1 { grid-area: item-1; }
-        .discover { grid-area: content; }
-        .item-2 { grid-area: item-2; }
-
-        .collection-content {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100%;
-            
-            .container {
-                text-align: center;
-                padding: 30px 20px;
-
-                @include md {
-                    padding: 30px 80px;
-                }
-
-                @include lg {
-                    padding: 10px 20px;
-                }
-
-                @include xl {
-                    padding: 30px;
-                }
-            }
-
-            .title-red {
-                font-family: $font-poppins;
-                color: $color-theme-1;
-                font-size: 18px;
-                font-weight: $font-weight-bold;
-            }
-            .title {
-                font-family: $font-playfair;
-                font-weight: $font-weight-bold;
-                font-size: 48px;
-                color: $color-dark-2;
-            }
-            .ingress {
-                font-family: $font-poppins;
-                color: $color-dark-2;
-                font-size: 24px;
-                font-weight: $font-weight-bold;
-            }
-            .text {
-                margin-top: 20px;
-                font-family: $font-roboto;
-                color: $color-dark-3;
-                font-size: 16px;
-                font-weight: $font-weight-regular;
-            }
-            .link {
+        @include xxl {
+            .last {
                 display: block;
-                margin-top: 10px;
-                color: $color-dark-2;
+            }
+        }
+    }
 
-                &:hover {
-                    color: $color-theme-1;
-                }
+    .col {
+        width: 269px;
+        padding: 0;
 
-                @include xl {
-                    margin-top:50px;
-                }
+        @include sm {
+            width: 369px;
+        }
+    }
+
+    .card {
+        width: 269px;
+
+        @include sm {
+            width: 369px;
+        }
+
+        .img-holder {
+            width: 269px;
+
+            @include sm {
+                width: 369px;
+            }
+
+            img {
+                width: 100%;
+                border-radius: 0;
+                transition: 0.45s ease-in-out;
             }
         }
 
+        .card-body {
+            display: block;
+            padding: 20px;
+
+            .card-link {
+                display: inline-block;
+                margin-bottom: 30px;
+            }
+
+            .card-body-holder {
+                display: flex;
+                justify-content: space-between;
+
+                .price-holder {
+                    display: flex;
+                    align-items: center;
+
+                    .card-previous-price {
+                        margin: 0;
+                        text-decoration: line-through;
+                    }
+
+                    .card-text {
+                        margin-left: 15px;
+
+                        @include sm {
+                            margin-left: 30px;
+                        }
+                    }
+                }
+
+                .card-icon {
+                    color: $color-black;
+
+                    @include sm {
+                        color: $color-dark-3;
+                    }
+
+                    &:hover {
+                        color: $color-theme-1;
+                    }
+                }
+            }
+        }
+    }
+
+    .discount-info {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+        color: #363636;
+        background: $color-white;
+        height: 436px;
+
+        @include sm {
+            padding: 50px;
+        }
+
+        p {
+            text-align: center;
+            margin: 0;
+            margin-bottom: 0px;
+
+            @include sm {
+                margin-bottom: 15px;
+            }
+        }
+
+        .heading {
+            color: $color-theme-1;
+            font-size: 18px;
+            font-weight: $font-weight-bold;
+        }
+
+        .procent {
+            font-family: $font-playfair;
+            font-size: 48px;
+        }
+
+        .best-price {
+            font-weight: $font-weight-bold;
+            font-size: 24px;
+        }
+
+        .text {
+            display: none;
+            font-family: $font-roboto;
+
+            @include sm {
+                display: block;
+                margin-bottom: 30px;
+            }
+        }
+
+        .link {
+            margin-top: 15px;
+
+            @include sm {
+                margin-top: 0px;
+            }
+        }
     }
 }

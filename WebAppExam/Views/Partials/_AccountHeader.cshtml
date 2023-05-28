@@ -1,17 +1,17 @@
-﻿<div class="account-header container-fluid">
+﻿<div class="accountheader container-fluid">
 	<div class="container">
 		<div class="left-link">
-			Hi! <a class="link fw-bold" asp-controller="Account" asp-action="Index">@(User.FindFirst("DisplayName")?.Value)</a>!
+			Hello <a class="link fw-bold" style="text-decoration:none" asp-controller="account" asp-action="index">@(User.FindFirst("DisplayName")?.Value)</a>
 		</div>
 		<div class="right-link">
-			<a class="link" asp-controller="Account" asp-action="index">My Account</a>
+			<a class="link" style="text-decoration:none" asp-controller="account" asp-action="index">My Account</a>
 
 			@if (User.IsInRole("admin"))
 			{
-				<a class="link" asp-controller="admin" asp-action="Index">Admin</a>
+				<a class="link" style="text-decoration:none" asp-controller="admin" asp-action="index">Admin</a>
 			}
 
-			<a class="link" asp-controller="Account" asp-action="Logout">Logout</a>
+			<a class="link" style="text-decoration:none" asp-controller="account" asp-action="logout">Logout</a>
 		</div>
 	</div>
 </div>

@@ -6,11 +6,11 @@ namespace WebAppExam.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly GridCollectionCardService _gridCollectionCardService;
+        private readonly GridCollectionItemService _gridCollectionItemService;
 
-        public HomeController(GridCollectionCardService gridCollectionCardService)
+        public HomeController(GridCollectionItemService gridCollectionItemService)
         {
-            _gridCollectionCardService = gridCollectionCardService;
+            _gridCollectionItemService = gridCollectionItemService;
         }
         public async Task <IActionResult> Index()
         {
@@ -20,19 +20,19 @@ namespace WebAppExam.Controllers
                 {
                     Title = "Best Collection",
                     Categories = new List<string> { "All", "Bags", "Dress", "Decoration", "Essentials", "Interior", "Laptop", "Mobile", "Beauty" },
-                    GridItems = await _gridCollectionCardService.PopulateCardsByCategoryIdAsync(x => x.CategoryId == 3), //CategoryId = 3 => "featured"
+                    GridItems = await _gridCollectionItemService.PopulateItemsByCategoryIdAsync(x => x.CategoryId == 3), //CategoryId = 3 => "featured"
                     LoadMore = true
                 },
                 NewCollection = new GridCollectionViewModel
                 {
                     Title = "New arrivals",
-                    GridItems = await _gridCollectionCardService.PopulateCardsByCategoryIdAsync(x => x.CategoryId == 1), //CategoryId = 1 => "new"
+                    GridItems = await _gridCollectionItemService.PopulateItemsByCategoryIdAsync(x => x.CategoryId == 1), //CategoryId = 1 => "new"
                     LoadMore = false
                 },
                 TopSellingCollection = new GridCollectionViewModel
                 {
                     Title = "Top selling products in this week",
-                    GridItems = await _gridCollectionCardService.PopulateCardsByCategoryIdAsync(x => x.CategoryId == 2), //CategoryId = 2 => "popular"
+                    GridItems = await _gridCollectionItemService.PopulateItemsByCategoryIdAsync(x => x.CategoryId == 2), //CategoryId = 2 => "popular"
                     LoadMore = true
                 },
                 PlantSpotlight = new SpotlightViewModel

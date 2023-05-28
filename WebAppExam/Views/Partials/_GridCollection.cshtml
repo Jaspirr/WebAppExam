@@ -2,26 +2,25 @@
 
 @if (Model != null)
 {
-    <section class="grid-collection">
+    <section class="gridcollection">
         <div class="container">
-            @if (!string.IsNullOrEmpty(Model.Title))
-            {
-                <h1 class="title">@Model.Title</h1>
-            }
+            <div class="heading">@Model.Title</div>
 
             @if (Model.Categories != null)
             {
-                <ul class="categories">
+                <ul class="breadcrumb">
+
                     @foreach (var category in Model.Categories)
                     {
-                        <li class="category-item">@category</li>
+                        <li><a class="link" href="#">@category</a></li>
                     }
                 </ul>
             }
 
             @if (Model.GridItems != null)
             {
-                <div class="grid">
+                <div class="row row-cols-4">
+
                     @foreach (var item in Model.GridItems)
                     {
                         <partial name="/Views/Partials/_GridCollectionItem.cshtml" model="item" />
@@ -31,9 +30,7 @@
 
             @if (Model.LoadMore)
             {
-                <div class="load-more">
-                    <button class="btn-outline-white">LOAD MORE <i class="fa-solid fa-rotate-right"></i></button>
-                </div>
+                <button>LOAD MORE <i class="fa-solid fa-rotate-right"></i></button>
             }
 
         </div>
