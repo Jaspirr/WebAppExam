@@ -29,15 +29,12 @@ namespace WebAppExam.Services
                 _productContext.Products.Add(productEntity);
                 await _productContext.SaveChangesAsync();
 
-                //---WITH MULTIPLE CATEGORIES---
                 if (viewModel.CheckboxCategoryId.Any())
                 {
                     foreach (var categoryId in viewModel.CheckboxCategoryId)
                     {
-                        //get the currentCategory so the id can be used
                         var currentCategory = await _productContext.Categories.FirstOrDefaultAsync(x => x.Id == categoryId);
 
-                        //converts to ProductCategoryEntity
                         var productCategoryEntity = new ProductCategoryEntity
                         {
                             ProductId = productEntity.Id,

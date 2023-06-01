@@ -5,7 +5,7 @@ namespace WebAppExam.Contexts
 {
     public class ProductContext : DbContext
     {
-        public ProductContext(DbContextOptions options) : base(options)
+        public ProductContext(DbContextOptions<ProductContext> options) : base(options)
         {
         }
 

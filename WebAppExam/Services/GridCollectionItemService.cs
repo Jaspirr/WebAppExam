@@ -17,17 +17,17 @@ public class GridCollectionItemService
     {
         try
         {
-            var items = new List<GridCollectionItemViewModel>();
+            var cards = new List<GridCollectionItemViewModel>();
             var products = await _productService.GetAllAsync();
 
             foreach (var product in products)
             {
-                GridCollectionItemViewModel item = product;
+                GridCollectionItemViewModel card = product;
 
-                items.Add(item);
+                cards.Add(card);
             }
 
-            return items;
+            return cards;
         }
         catch
         {
@@ -39,17 +39,17 @@ public class GridCollectionItemService
     {
         try
         {
-            var items = new List<GridCollectionItemViewModel>();
+            var cards = new List<GridCollectionItemViewModel>();
             var products = await _productService.GetProductsByCategoryIdAsync(predicate);
 
             foreach (var product in products)
             {
-                GridCollectionItemViewModel item = product;
+                GridCollectionItemViewModel card = product;
 
-                items.Add(item);
+                cards.Add(card);
             }
 
-            return items;
+            return cards;
         }
         catch
         {

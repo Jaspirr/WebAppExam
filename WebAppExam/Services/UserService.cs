@@ -21,22 +21,20 @@ public class UserService
 
     public async Task<UserProfileEntity> GetUserProfileAsync(string userId)
     {
-        var userProfileEntity = await _identityContext.UserProfiles.Include(x => x.User).Include(x => x.Address).FirstOrDefaultAsync(x => x.UserId == userId);
-        if (userProfileEntity != null)
+        var profileEntity = await _identityContext.UserProfiles.FirstOrDefaultAsync(u => u.Id == userId);
+
+        var userProfileEntity = new UserProfileEntity
         {
-            UserProfileEntity convertedProfileEntity = new UserProfileEntity
-            {
-                UserId = userProfileEntity.UserId,
-                FirstName = userProfileEntity.FirstName,
-                LastName = userProfileEntity.LastName,
-                // Andra egenskaper i UserProfileEntity
-                Address = userProfileEntity.Address
-            };
+            Id = profileEntity.Id,
+            FirstName = profileEntity.FirstName,
+            LastName = profileEntity.LastName,
+            StreetName = profileEntity.StreetName,
+            PostalCode = profileEntity.PostalCode,
+            City = profileEntity.City,
+            User = profileEntity.User
+        };
 
-            return convertedProfileEntity;
-        }
-
-        return null;
+        return userProfileEntity;
     }
 
     public async Task<IdentityUser> GetIdentityUserAsync(string email)
@@ -46,30 +44,26 @@ public class UserService
         return identityUser!;
     }
 
+
     public async Task<IEnumerable<UserModel>> GetAllUserModelAsync()
     {
         var userModels = new List<UserModel>();
         var userProfileEntities = await _identityContext.UserProfiles.Include(x => x.User).ToListAsync();
+
         var roles = await _roleService.GetUserRolesAsync();
 
         foreach (var user in userProfileEntities)
         {
-            UserModel userModel = new UserModel
-            {
-                Id = user.UserId,
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                // ...
 
-                // Du kanske behöver tilldela andra egenskaper här baserat på ditt User- och ProfileEntity-schema
-            };
+            UserModel userModel = user;
 
             var foundRole = roles.FirstOrDefault(x => x.Id == userModel.Id);
-            userModel.Role = foundRole?.RoleName;
+
+            userModel.Role = foundRole!.RoleName;
 
             userModels.Add(userModel);
         }
 
-        return userModels; // Lägg till returinstruktionen här
+        return userModels!;
     }
 }

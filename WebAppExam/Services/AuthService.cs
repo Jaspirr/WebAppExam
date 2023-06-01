@@ -30,62 +30,46 @@ public class AuthService
 
 
 
-    public async Task<bool> RegisterAsync(AccountRegisterViewModel viewModel)
+    public async Task<bool> RegisterAsync(RegisterViewModel viewModel)
     {
         try
         {
+            await _seedService.SeedRoles();
             var roleName = "user";
-
+            //Om det inte finns några användare, lägg till roll till admin rollen annars user rollen.
             if (!await _userManager.Users.AnyAsync())
                 roleName = "admin";
 
-            IdentityUser identityUser = viewModel;
+            //Skapa användare/registrerar  
+            IdentityUser identityUser = new IdentityUser
+            {
+                UserName = viewModel.Email,
+                Email = viewModel.Email,
+                PhoneNumber = viewModel.PhoneNumber
+            };
             await _userManager.CreateAsync(identityUser, viewModel.Password);
 
             await _userManager.AddToRoleAsync(identityUser, roleName);
 
-            UserProfileEntity userProfileEntity = viewModel;
-            userProfileEntity.UserId = identityUser.Id;
-
-            AddressEntity addressEntity = viewModel;
-
-            var addressInDb = await _identityContext.Addresses.FirstOrDefaultAsync(x => x.StreetName == viewModel.StreetName);
-            if (addressInDb != null)
-            {
-                userProfileEntity.AddressId = addressInDb.Id;
-            }
-            else
-            {
-                _identityContext.Addresses.Add(addressEntity);
-                await _identityContext.SaveChangesAsync();
-                userProfileEntity.AddressId = addressEntity.Id;
-            }
-
-            // Konvertera UserProfileEntity till ProfileEntity
+            //Skapa profil för användarprofil
             ProfileEntity profileEntity = new ProfileEntity
             {
-                UserId = userProfileEntity.UserId,
-                FirstName = userProfileEntity.FirstName,
-                LastName = userProfileEntity.LastName,
-                StreetName = userProfileEntity.Address.StreetName,
-                PostalCode = userProfileEntity.Address.PostalCode,
-                City = userProfileEntity.Address.City,
-                CompanyName = userProfileEntity.CompanyName,
-                ProfileImage = userProfileEntity.ProfileImage,
-                Address = userProfileEntity.Address
+                FirstName = viewModel.FirstName,
+                LastName = viewModel.LastName,
             };
+            profileEntity.Id = identityUser.Id;
 
+            //sparar ner till identitycontext
             _identityContext.UserProfiles.Add(profileEntity);
             await _identityContext.SaveChangesAsync();
 
             return true;
+
         }
-        catch
-        {
-            return false;
-        }
+        catch { return false; }
+
     }
-    
+
     public async Task<bool> RegisterAsync(UserRegisterViewModel viewModel)
     {
         try
@@ -97,7 +81,7 @@ public class AuthService
                 await _userManager.AddToRoleAsync(identityUser, viewModel.Role);
 
             UserProfileEntity userProfileEntity = viewModel;
-            userProfileEntity.UserId = identityUser.Id;
+            userProfileEntity.Id = identityUser.Id;
 
             AddressEntity addressEntity = viewModel;
 
@@ -116,15 +100,12 @@ public class AuthService
             // Konvertera UserProfileEntity till ProfileEntity
             ProfileEntity profileEntity = new ProfileEntity
             {
-                UserId = userProfileEntity.UserId,
+                Id = userProfileEntity.Id,
                 FirstName = userProfileEntity.FirstName,
                 LastName = userProfileEntity.LastName,
                 StreetName = userProfileEntity.Address.StreetName,
                 PostalCode = userProfileEntity.Address.PostalCode,
                 City = userProfileEntity.Address.City,
-                CompanyName = userProfileEntity.CompanyName,
-                ProfileImage = userProfileEntity.ProfileImage,
-                Address = userProfileEntity.Address
             };
 
             _identityContext.UserProfiles.Add(profileEntity);

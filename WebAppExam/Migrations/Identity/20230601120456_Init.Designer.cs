@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAppExam.Contexts;
 
@@ -11,9 +12,11 @@ using WebAppExam.Contexts;
 namespace WebAppExam.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    partial class IdentityContextModelSnapshot : ModelSnapshot
+    [Migration("20230601120456_Init")]
+    partial class Init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,13 +54,13 @@ namespace WebAppExam.Migrations.Identity
                     b.HasData(
                         new
                         {
-                            Id = "8cb62b1c-5980-4aca-b093-27fc5bd12edf",
+                            Id = "6fb5c3fc-72f9-40eb-a9e9-2af0a2c1d1ab",
                             Name = "admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "5acf3e8b-bab9-4c9b-a765-56ccf5e476ce",
+                            Id = "66e3a3df-163c-4ff1-8f8c-e276148791bf",
                             Name = "user",
                             NormalizedName = "USER"
                         });
@@ -267,6 +270,9 @@ namespace WebAppExam.Migrations.Identity
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("CompanyName")
+                        .HasColumnType("nvarchar(50)");
+
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("nvarchar(20)");
@@ -277,6 +283,9 @@ namespace WebAppExam.Migrations.Identity
 
                     b.Property<string>("PostalCode")
                         .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("ProfileImage")
+                        .HasColumnType("varchar(max)");
 
                     b.Property<string>("StreetName")
                         .HasColumnType("nvarchar(50)");

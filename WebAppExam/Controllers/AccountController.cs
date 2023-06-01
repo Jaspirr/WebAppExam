@@ -57,7 +57,7 @@ namespace WebAppExam.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(AccountRegisterViewModel viewModel)
+        public async Task<IActionResult> Register(RegisterViewModel viewModel)
         {
             ViewData["Title"] = "Register Account";
 

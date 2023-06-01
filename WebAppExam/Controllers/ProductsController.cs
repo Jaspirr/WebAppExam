@@ -74,7 +74,7 @@ namespace WebAppExam.Controllers
         }
 
 
-        //----PRODUCT LIST----
+        //PRODUCT LIST
         [Authorize(Roles = "admin")]
         public async Task<IActionResult> List()
         {
